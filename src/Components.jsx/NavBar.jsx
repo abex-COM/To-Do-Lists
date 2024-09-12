@@ -15,7 +15,7 @@ export default function NavBar({ children }) {
         <>
           <div className="flex gap-2">
             <img
-              src="./src/assets/icons8-check.svg"
+              src="../src/assets/icons8-check.svg"
               className="h-8 w-8"
               alt="image"
             />
