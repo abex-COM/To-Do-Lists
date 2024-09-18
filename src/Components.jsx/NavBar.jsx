@@ -1,7 +1,7 @@
 import { IconButton, Input, InputAdornment } from "@mui/material";
 import Kebab from "./Kebab";
 
-import { ArrowBack, Clear, Search } from "@mui/icons-material";
+import { ArrowBack, CheckCircle, Clear, Search } from "@mui/icons-material";
 import { useEffect, useRef, useState } from "react";
 import { useTodoList } from "../Contexts/Context";
 export default function NavBar({ children }) {
@@ -14,10 +14,12 @@ export default function NavBar({ children }) {
       {!searchInput ? (
         <>
           <div className="flex gap-2">
-            <img
-              src="../src/assets/icons8-check.svg"
-              className="h-8 w-8"
-              alt="image"
+            <CheckCircle
+              sx={{
+                lg: {
+                  width: "10px",
+                },
+              }}
             />
             <select className="border-none bg-transparent outline-none">
               <option>All Lists</option>
