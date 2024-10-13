@@ -26,10 +26,11 @@ export default [
     rules: {
       ...js.configs.recommended.rules,
       ...react.configs.recommended.rules,
-      "react/propt-ypes": 0,
       ...react.configs["jsx-runtime"].rules,
       ...reactHooks.configs.recommended.rules,
       "react/jsx-no-target-blank": "off",
+      "react/prop-types": false,
+
       "react-refresh/only-export-components": [
         "warn",
         { allowConstantExport: true },

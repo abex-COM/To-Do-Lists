@@ -4,9 +4,9 @@ import { useNavigate } from "react-router-dom";
 export default function PlusIcon() {
   const navige = useNavigate();
   return (
-    <div className="fixed bottom-12 right-10 ">
+    <div className="fixed bottom-14 right-10">
       <IconButton
-        onClick={()=>navige("/newTask")}
+        onClick={() => navige("/newTask")}
         sx={{ background: "white", ":hover": { backgroundColor: "green" } }}
       >
         <AddIcon sx={{ color: "blue" }} />

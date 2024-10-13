@@ -16,8 +16,11 @@ export default function NavBar({ children }) {
           <div className="flex gap-2">
             <CheckCircle
               sx={{
-                lg: {
-                  width: "10px",
+                fontSize: {
+                  xs: "2rem", // Extra small devices min 0px- 600px
+                  sm: "2.5rem", // Small devices (600px and up)
+                  md: "3rem", // Medium devices (960px and up)
+                  lg: "2rem", // Large devices (1280px and up)
                 },
               }}
             />
@@ -45,7 +48,7 @@ export default function NavBar({ children }) {
 }
 
 function SearchInput({ onshowInput }) {
-  const { setSearchQuery, searchQuery } = useTodoList();
+  const { setSearchQuery, searchQuery, dispatch } = useTodoList();
   const inputElement = useRef(null);
 
   useEffect(() => {
@@ -59,24 +62,25 @@ function SearchInput({ onshowInput }) {
       <IconButton onClick={onshowInput}>
         <ArrowBack sx={{ color: "white" }} />
       </IconButton>
-      <div>
+      <div className="flex items-center justify-center">
+        <Search />
         <Input
           type="text"
+          disableUnderline
           sx={{ border: "none", color: "white", outline: "none" }}
           value={searchQuery}
           inputRef={inputElement}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          startAdornment={<Search />}
-          endAdornment={
-            searchQuery && (
-              <InputAdornment position="end">
-                <IconButton onClick={() => setSearchQuery("")}>
-                  <Clear sx={{ color: "white" }} />
-                </IconButton>
-              </InputAdornment>
-            )
+          onChange={(e) =>
+            dispatch({ type: "setSearchQuery", payload: e.target.value })
           }
         />
+        {searchQuery && (
+          <InputAdornment position="end">
+            <IconButton onClick={() => setSearchQuery("")}>
+              <Clear sx={{ color: "white" }} />
+            </IconButton>
+          </InputAdornment>
+        )}
       </div>
     </div>
   );
