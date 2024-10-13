@@ -18,7 +18,7 @@ export default function KebabMenu() {
         <MoreVertIcon sx={{ color: "white" }} />
       </IconButton>
       {showMenu && (
-        <nav className="fixed right-0 top-0 rounded-md bg-sky-500 p-1 pb-6 shadow-md duration-300">
+        <nav className="fixed right-0 top-0 z-10 rounded-md bg-sky-500 p-1 pb-6 shadow-md duration-300">
           <ul className="flex flex-col gap-4" ref={menuRef}>
             <li className="p-1 hover:bg-sky-600">
               <Link to="">TaskList</Link>
