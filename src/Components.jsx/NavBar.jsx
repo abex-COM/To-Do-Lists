@@ -62,7 +62,7 @@ function SearchInput({ onshowInput }) {
       <IconButton onClick={onshowInput}>
         <ArrowBack sx={{ color: "white" }} />
       </IconButton>
-      <div className="flex items-center justify-center">
+      <div className="flex items-center justify-center gap-4">
         <Search />
         <Input
           type="text"
@@ -76,7 +76,9 @@ function SearchInput({ onshowInput }) {
         />
         {searchQuery && (
           <InputAdornment position="end">
-            <IconButton onClick={() => setSearchQuery("")}>
+            <IconButton
+              onClick={() => dispatch({ type: "setSearchQuery", payload: "" })}
+            >
               <Clear sx={{ color: "white" }} />
             </IconButton>
           </InputAdornment>

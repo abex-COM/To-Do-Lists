@@ -6,10 +6,7 @@ const initialState = {
   searchQuery: "",
   newTaskName: "",
   taskDate: "",
-  tasks: [
-    { id: 1, taskName: "Tasyrtsydtayrdyardt7at7dr7tq7qd7k 1", date: "2024-10-11" },
-    { id: 2, taskName: "Task 1", date: "2024-10-12" }, // Duplicate task name, but unique id
-  ],
+  tasks: [],
 };
 
 const TodoListContext = createContext();
@@ -18,12 +15,17 @@ function reducer(state, action) {
   switch (action.type) {
     case "setShowMenu":
       return { ...state, showMenu: action.payload };
+    case "dataFetched":
+      return { ...state, tasks: action.payload, status: "ready" };
     case "setSearchQuery":
       return { ...state, searchQuery: action.payload };
-    case "addTask":
+    case "addTasks":
+      const updatedTasks = [...state.tasks, action.payload];
+      localStorage.setItem("tasks", JSON.stringify(updatedTasks));
       return {
         ...state,
-        tasks: [...state.tasks, action.payload],
+        tasks: updatedTasks,
+        newTaskName: "",
       };
     case "setTask":
       return { ...state, newTaskName: action.payload };
@@ -51,6 +53,12 @@ function TodoListProvider({ children }) {
     dispatch({ type: "setShowMenu", payload: false });
   };
 
+  useEffect(() => {
+    const fetchedData = JSON.parse(localStorage.getItem("tasks"))||[];
+    if (fetchedData) {
+      dispatch({ type: "dataFetched", payload: fetchedData });
+    }
+  }, []);
   function handleDelete(taskIds) {
     dispatch({ type: "deleteTask", payload: taskIds }); // Send the array of selected IDs
   }
@@ -71,6 +79,7 @@ function TodoListProvider({ children }) {
         newTaskName,
         taskDate,
         tasks,
+        status,
         handleDelete,
       }}
     >

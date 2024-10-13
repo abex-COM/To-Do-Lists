@@ -3,6 +3,7 @@ import { CheckCircle } from "@mui/icons-material";
 import { useTodoList } from "../Contexts/Context";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import Loader from "../Components.jsx/Loader";
 const getCurrentDate = () => {
   const today = new Date();
   return today.toISOString().split("T")[0]; // Format as YYYY-MM-DD
@@ -31,7 +32,7 @@ export default function NewTask() {
       taskName: newTaskName,
       date: taskDate,
     };
-    dispatch({ type: "addTask", payload: newTasks });
+    dispatch({ type: "addTasks", payload: newTasks });
     navigate("/");
   }
   return (
@@ -42,7 +43,7 @@ export default function NewTask() {
       <div className="grid gap-2">
         <label className="text-sky-300">What is to be done? </label>
         <textarea
-          className="w-full rounded-md bg-slate-200 p-4 text-slate-400 outline-sky-500"
+          className="w-full rounded-md bg-sky-600 p-4 text-sky-100 outline-sky-500"
           rows={2}
           cols={30}
           placeholder="Add new task"
@@ -56,7 +57,7 @@ export default function NewTask() {
       <div className="flex w-max flex-col gap-4">
         <label className="text-sky-300">Due date</label>
         <input
-          className="rounded-md bg-sky-400 p-4"
+          className="rounded-md bg-sky-500 p-4"
           type="date"
           sx={{ color: "skyblue" }}
           value={taskDate}
